@@ -1,6 +1,12 @@
 ---
 - name: install ipmitool
-  yum: pkg=ipmitool state=present
+  apt: pkg=ipmitool state=latest
+  when: ansible_pkg_mgr=="apt"
+  tags: ipmi, packages
+
+- name: install ipmitool
+  yum: pkg=ipmitool state=latest
+  when: ansible_pkg_mgr=="yum"
   tags: ipmi, packages
 
 - name: load ipmi kernel modules
